@@ -1,0 +1,41 @@
+{
+  "name": "mal-ts",
+  "version": "1.0.0",
+  "description": "TypeScript-safe MyAnimeList Public API wrapper",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --build",
+    "build:watch": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mist8kengas/mal-ts.git"
+  },
+  "keywords": [
+    "mal-ts",
+    "MyAnimeList",
+    "MAL",
+    "API",
+    "TypeScript",
+    "JavaScript",
+    "Node",
+    "NodeJS"
+  ],
+  "author": "mist8kengas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mist8kengas/mal-ts/issues"
+  },
+  "homepage": "https://github.com/mist8kengas/mal-ts#readme",
+  "devDependencies": {
+    "@types/node": "^17.0.17",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.5"
+  },
+  "type": "module",
+  "dependencies": {
+    "axios": "^0.25.0"
+  },
+  "types": "./dist/index.d.ts"
+}
