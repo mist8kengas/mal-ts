@@ -1,6 +1,6 @@
 {
   "name": "mal-ts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TypeScript-safe MyAnimeList Public API wrapper",
   "main": "dist/index.js",
   "scripts": {

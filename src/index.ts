@@ -58,9 +58,4 @@ class MyAnimeList {
     }
 }
 
-// > test
-// const mal = new MyAnimeList('9e168b44a8715fd7c1d1dd1e2c0edad6');
-// console.log('anime', await mal.anime(38000));
-// console.log('manga', await mal.manga(96792));
-
 export default MyAnimeList;
