@@ -1,9 +1,14 @@
 import type * as MAL from './types/myanimelist';
+/**
+ * @author mist8kengas
+ * @version 1.1.0
+ */
 declare class MyAnimeList {
     private client_id;
     private request;
     /**
      *
+     * @constructor
      * @description Initialize a new MAL wrapper
      * @param client_id MAL Client ID
      */

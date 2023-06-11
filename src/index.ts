@@ -1,18 +1,30 @@
 import type * as MAL from './types/myanimelist';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
-import malURL, { API, Type } from './utils/mal-url.js';
-import defaultFields from './utils/default-fields.js';
+import malURL, { API, Type } from './utils/urlConstructor.js';
+import defaultFields from './utils/defaultFields.js';
 
+/**
+ * @author mist8kengas
+ * @version 1.1.0
+ */
 class MyAnimeList {
     private client_id = '';
-    private request = (url: URL, client_id: string) =>
-        axios
-            .get(url.href, { headers: { 'X-MAL-CLIENT-ID': client_id } })
+
+    private async request<T extends any>(
+        url: URL,
+        client_id: string
+    ): Promise<AxiosResponse<T>> {
+        return axios
+            .get<T>(url.href, {
+                headers: { 'X-MAL-CLIENT-ID': client_id },
+            })
             .catch((error) => error);
+    }
 
     /**
      *
+     * @constructor
      * @description Initialize a new MAL wrapper
      * @param client_id MAL Client ID
      */
@@ -32,13 +44,12 @@ class MyAnimeList {
      * @param fields MAL Fields
      * @returns Response object
      */
-    async anime(
-        id: string | number,
-        fields?: MAL.AnimeField[]
-    ): Promise<MAL.AnimeDetails> {
+    async anime(id: string | number, fields?: MAL.AnimeField[]) {
         const url = malURL(API.V2, Type.Anime, id, fields);
-        const { data } = await this.request(url, this.client_id);
-        return data;
+        const req = await this.request<MAL.AnimeDetails>(url, this.client_id);
+
+        if (req.status == 200) return req.data;
+        else throw req.data;
     }
 
     /**
@@ -48,13 +59,12 @@ class MyAnimeList {
      * @param fields MAL Fields
      * @returns Response object
      */
-    async manga(
-        id: string | number,
-        fields?: MAL.MangaField[]
-    ): Promise<MAL.MangaDetails> {
+    async manga(id: string | number, fields?: MAL.MangaField[]) {
         const url = malURL(API.V2, Type.Manga, id, fields);
-        const { data } = await this.request(url, this.client_id);
-        return data;
+        const req = await this.request<MAL.MangaDetails>(url, this.client_id);
+
+        if (req.status == 200) return req.data;
+        else throw req.data;
     }
 }
 

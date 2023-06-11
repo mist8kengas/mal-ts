@@ -44,6 +44,8 @@ const mal = new MyAnimeList('client_id');
 
 **mal-ts** includes [TypeScript](http://typescriptlang.org/) definitions.
 
+_TSDoc (JSDoc) descriptions are derived from the [MyAnimeList API reference](https://myanimelist.net/apiconfig/references/api/v2)_
+
 ## License
 
 [MIT](https://github.com/mist8kengas/mal-ts/blob/HEAD/LICENSE)

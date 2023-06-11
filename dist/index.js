@@ -1,13 +1,22 @@
 import axios from 'axios';
-import malURL, { API, Type } from './utils/mal-url.js';
-import defaultFields from './utils/default-fields.js';
+import malURL, { API, Type } from './utils/urlConstructor.js';
+import defaultFields from './utils/defaultFields.js';
+/**
+ * @author mist8kengas
+ * @version 1.1.0
+ */
 class MyAnimeList {
     client_id = '';
-    request = (url, client_id) => axios
-        .get(url.href, { headers: { 'X-MAL-CLIENT-ID': client_id } })
-        .catch((error) => error);
+    async request(url, client_id) {
+        return axios
+            .get(url.href, {
+            headers: { 'X-MAL-CLIENT-ID': client_id },
+        })
+            .catch((error) => error);
+    }
     /**
      *
+     * @constructor
      * @description Initialize a new MAL wrapper
      * @param client_id MAL Client ID
      */
@@ -27,8 +36,11 @@ class MyAnimeList {
      */
     async anime(id, fields) {
         const url = malURL(API.V2, Type.Anime, id, fields);
-        const { data } = await this.request(url, this.client_id);
-        return data;
+        const req = await this.request(url, this.client_id);
+        if (req.status == 200)
+            return req.data;
+        else
+            throw req.data;
     }
     /**
      *
@@ -39,13 +51,12 @@ class MyAnimeList {
      */
     async manga(id, fields) {
         const url = malURL(API.V2, Type.Manga, id, fields);
-        const { data } = await this.request(url, this.client_id);
-        return data;
+        const req = await this.request(url, this.client_id);
+        if (req.status == 200)
+            return req.data;
+        else
+            throw req.data;
     }
 }
-// > test
-// const mal = new MyAnimeList('9e168b44a8715fd7c1d1dd1e2c0edad6');
-// console.log('anime', await mal.anime(38000));
-// console.log('manga', await mal.manga(96792));
 export default MyAnimeList;
 //# sourceMappingURL=index.js.map
